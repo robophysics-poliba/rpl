@@ -19,9 +19,9 @@ npm run dev          # http://localhost:3000
 Il sito parte anche senza database: in quel caso serve i contenuti di
 `src/lib/data/content.ts` e mostra una striscia gialla in fondo alle pagine.
 
-La striscia non compare sul build statico per GitHub Pages: lì il database non
-esiste per costruzione, quindi non c'è nessun guasto da segnalare. Resta invece
-attiva sul sito servito da un server, dove Supabase dovrebbe rispondere.
+La striscia compare solo se un database è configurato e non risponde. Se le
+variabili di Supabase non ci sono — com'è nel build statico pubblicato — i
+contenuti offline sono il funzionamento previsto e non viene segnalato nulla.
 
 Su questa macchina node e npm stanno in `~/.local/node/bin`, che non è nel
 PATH: in una shell nuova va esportato prima, altrimenti `npm` non si trova.

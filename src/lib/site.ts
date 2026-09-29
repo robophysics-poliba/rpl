@@ -14,12 +14,15 @@ export const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
  * Gli indirizzi assoluti (le miniature YouTube) restano intatti.
  */
 /**
- * Vero quando il sito è generato come export statico per GitHub Pages.
- * È la stessa variabile che imposta il sottopercorso: in next.config.ts
- * `output: "export"` dipende da NEXT_PUBLIC_BASE_PATH, quindi le due cose
- * si accendono insieme.
+ * Vero quando il sito è configurato per parlare con un database.
+ *
+ * Serve a decidere se i contenuti offline sono un guasto o il funzionamento
+ * previsto: senza le variabili di Supabase — com'è nel build statico — non
+ * c'è nessun database che dovrebbe rispondere, quindi non c'è niente da
+ * segnalare. La variabile ha il prefisso NEXT_PUBLIC_, quindi il valore è lo
+ * stesso lato server e lato browser.
  */
-export const sitoStatico = basePath !== "";
+export const databaseAtteso = Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL);
 
 export const asset = (path: string) =>
   path.startsWith("/") ? `${basePath}${path}` : path;

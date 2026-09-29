@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { sitoStatico } from "@/lib/site";
+import { databaseAtteso } from "@/lib/site";
 import type { ReactNode } from "react";
 
 /** Hero blu delle pagine interne. */
@@ -63,12 +63,12 @@ export function Button({
  * quelli del database: vuol dire che Supabase non risponde o che le tabelle
  * non ci sono.
  *
- * Sul sito statico non compare mai. Lì il database non esiste per
- * costruzione — i contenuti vengono da src/lib/data/content.ts ed è il
+ * Non compare quando nessun database è configurato: è il caso del build
+ * statico, dove i contenuti vengono da src/lib/data/content.ts ed è il
  * funzionamento previsto, non un guasto da annunciare a chi visita.
  */
 export function OfflineNotice({ show }: { show: boolean }) {
-  if (!show || sitoStatico) return null;
+  if (!show || !databaseAtteso) return null;
 
   return (
     <p className="avviso-offline">
