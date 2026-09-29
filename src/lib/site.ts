@@ -13,6 +13,14 @@ export const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
  * Senza questo, con un sottopercorso sarebbero tutte 404.
  * Gli indirizzi assoluti (le miniature YouTube) restano intatti.
  */
+/**
+ * Vero quando il sito è generato come export statico per GitHub Pages.
+ * È la stessa variabile che imposta il sottopercorso: in next.config.ts
+ * `output: "export"` dipende da NEXT_PUBLIC_BASE_PATH, quindi le due cose
+ * si accendono insieme.
+ */
+export const sitoStatico = basePath !== "";
+
 export const asset = (path: string) =>
   path.startsWith("/") ? `${basePath}${path}` : path;
 

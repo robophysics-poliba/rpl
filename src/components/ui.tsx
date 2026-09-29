@@ -1,4 +1,6 @@
 import Link from "next/link";
+
+import { sitoStatico } from "@/lib/site";
 import type { ReactNode } from "react";
 
 /** Hero blu delle pagine interne. */
@@ -58,11 +60,15 @@ export function Button({
 
 /**
  * Avviso mostrato quando la pagina sta servendo i contenuti offline invece di
- * quelli del database. In produzione non deve mai comparire: se compare,
- * Supabase non risponde o le tabelle non ci sono.
+ * quelli del database: vuol dire che Supabase non risponde o che le tabelle
+ * non ci sono.
+ *
+ * Sul sito statico non compare mai. Lì il database non esiste per
+ * costruzione — i contenuti vengono da src/lib/data/content.ts ed è il
+ * funzionamento previsto, non un guasto da annunciare a chi visita.
  */
 export function OfflineNotice({ show }: { show: boolean }) {
-  if (!show) return null;
+  if (!show || sitoStatico) return null;
 
   return (
     <p className="avviso-offline">
