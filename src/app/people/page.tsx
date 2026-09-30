@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Fragment } from "react";
 
+import { Flag } from "@/components/flag";
 import { Media } from "@/components/media";
 import { Container, InnerHero, OfflineNotice } from "@/components/ui";
 import { getPeople } from "@/lib/queries";
@@ -46,6 +47,7 @@ export default async function PeoplePage() {
                       />
                     </div>
                     <div className="info">
+                      <Flag country={person.country} />
                       <div className="ruolo">{person.role}</div>
                       <h3>{person.name}</h3>
                       {person.bio && <p>{person.bio}</p>}

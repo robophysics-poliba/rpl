@@ -18,6 +18,7 @@ create table if not exists public.people (
   bio         text not null default '',
   photo_url   text,
   photo_label text not null default 'Portrait photo',
+  country     text,
   profile_url text,
   sort_order  integer not null default 0,
   published   boolean not null default true,
@@ -94,6 +95,9 @@ create table if not exists public.news (
 -- ------------------------------------------------------------- migrazioni --
 -- `create table if not exists` non tocca una tabella che esiste già: quello
 -- che è cambiato dopo il primo rilascio va riapplicato qui sotto.
+
+-- country: codice ISO per la bandierina in /people, aggiunto dopo il rilascio.
+alter table public.people add column if not exists country text;
 
 -- role_group ora accetta anche 'visitors' e 'alumni'.
 alter table public.people drop constraint if exists people_role_group_check;

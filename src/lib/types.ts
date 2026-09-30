@@ -15,6 +15,8 @@ export type Person = {
   bio: string;
   photo_url: string | null;
   photo_label: string;
+  /** Codice ISO del paese di provenienza, per la bandierina in /people. */
+  country: string | null;
   /** Pagina istituzionale o profilo pubblico, se la persona ne ha uno. */
   profile_url: string | null;
   sort_order: number;

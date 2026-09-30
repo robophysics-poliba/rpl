@@ -440,6 +440,18 @@ nav .sep {
 }
 .card-persona .info {
   padding: 20px 22px 26px;
+  position: relative;
+}
+/* Il campo della bandiera giapponese è bianco come il box: senza un bordo
+   si vedrebbe solo il disco rosso sospeso nel vuoto. */
+.card-persona .bandiera {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  width: 24px;
+  height: 16px;
+  display: block;
+  border: 1px solid #d5d7dc;
 }
 .card-persona .ruolo {
   font-family: var(--mono);

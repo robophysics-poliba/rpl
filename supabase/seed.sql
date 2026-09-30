@@ -7,70 +7,70 @@
 -- Usciti dal gruppo: la seed è rieseguibile, quindi vanno tolti esplicitamente.
 delete from public.people where slug in ('gabriele-pupillo', 'gennaro-vitucci', 'phd-slot', 'alumni-slot-1', 'alumni-slot-2', 'visitor-slot-1', 'visitor-slot-2');
 
-insert into public.people (slug, name, role, role_group, bio, photo_url, photo_label, profile_url, sort_order) values
+insert into public.people (slug, name, role, role_group, bio, photo_url, photo_label, country, profile_url, sort_order) values
   ('vito-cacucciolo', 'Vito Cacucciolo', 'Principal Investigator', 'pi',
    $t$Professor at Politecnico di Bari (DMMM). ERC Starting Grant holder with the RoboFluid project. Co-inventor of stretchable pumps (Nature, 2019) and fiber pumps (Science, 2023). Founder of the spin-off OmniGrasp.$t$,
-   '/people/vito-cacucciolo.jpg', 'Portrait photo',
+   '/people/vito-cacucciolo.jpg', 'Portrait photo', null,
    'https://www.linkedin.com/in/vito-cacucciolo/', 10),
 
   ('yu-kuwajima', 'Yu Kuwajima', 'Assistant Professor / RTDA', 'researchers',
    $t$Soft pumps and electrofluidics. Co-author of the stretchable pumps (Nature, 2019); now working on electro-active fluids for wearable robotics within the RoboFluid project.$t$,
-   '/people/yu-kuwajima.jpg', 'Portrait photo', 'https://www.linkedin.com/in/kuwajima-yu-313662308/', 20),
+   '/people/yu-kuwajima.jpg', 'Portrait photo', 'JP', 'https://www.linkedin.com/in/kuwajima-yu-313662308/', 20),
 
   ('angelo-catalano', 'Angelo Catalano', 'PhD Student', 'phd',
    $t$PhD candidate on robots-as-a-service for digital industry. Technical team leader in the winning entry at the RoboSoft Competition 2026 in Kanazawa.$t$,
-   '/people/angelo-catalano.jpg', 'Portrait photo', 'https://www.linkedin.com/in/-angelo-catalano/', 55),
+   '/people/angelo-catalano.jpg', 'Portrait photo', null, 'https://www.linkedin.com/in/-angelo-catalano/', 55),
 
   ('andrea-castellaneta', 'Andrea Castellaneta', 'PhD Student', 'phd',
    $t$Soft and wearable robotics powered by electro-active fluids, within the ERC RoboFluid project and the national PhD programme in Autonomous Systems (DAuSy).$t$,
-   '/people/andrea-castellaneta.jpg', 'Portrait photo', 'https://www.linkedin.com/in/andreacastellaneta1/', 60),
+   '/people/andrea-castellaneta.jpg', 'Portrait photo', null, 'https://www.linkedin.com/in/andreacastellaneta1/', 60),
 
   ('cesare-cariddi', 'Cesare Cariddi', 'PhD Student', 'phd',
    $t$Within the ERC RoboFluid project and the national PhD programme in Autonomous Systems (D-RIM).$t$,
-   '/people/cesare-cariddi.jpg', 'Portrait photo', 'https://www.linkedin.com/in/cesare-cariddi-7982a92bb/', 70),
+   '/people/cesare-cariddi.jpg', 'Portrait photo', null, 'https://www.linkedin.com/in/cesare-cariddi-7982a92bb/', 70),
 
   ('elisabetta-annese', 'Elisabetta Annese', 'MSc Student', 'students',
    $t$Member of the winning team at the RoboSoft Competition 2026 (Kanazawa, Japan). Thesis on soft manipulation.$t$,
-   '/people/silhouette-woman.jpg', 'Portrait not yet available', null, 80),
+   '/people/silhouette-woman.jpg', 'Portrait not yet available', null, null, 80),
 
   ('luca-mitaritonna', 'Luca Mitaritonna', 'MSc Student', 'students',
    $t$Member of the winning team at the RoboSoft Competition 2026 (Kanazawa, Japan). Thesis on electroadhesive grippers.$t$,
-   '/people/silhouette-man.jpg', 'Portrait not yet available', null, 90),
+   '/people/silhouette-man.jpg', 'Portrait not yet available', null, null, 90),
 
   ('giuseppe-macchia', 'Giuseppe Macchia', 'MSc Student', 'students',
    $t$Member of the winning team at the RoboSoft Competition 2026 (Kanazawa, Japan). Thesis on fluidic-actuator control.$t$,
-   '/people/silhouette-man.jpg', 'Portrait not yet available', null, 100),
+   '/people/silhouette-man.jpg', 'Portrait not yet available', null, null, 100),
 
   -- Bio ancora da scrivere: la card mostra nome, ruolo e link.
   ('simone-de-carolis', 'Simone De Carolis', 'Assistant Professor / RTDA', 'researchers',
    '',
-   '/people/simone-de-carolis.jpg', 'Portrait photo',
+   '/people/simone-de-carolis.jpg', 'Portrait photo', null,
    'https://www.linkedin.com/in/simone-de-carolis-3b9a3011b/', 45),
 
   ('angelica-de-michele', 'Angelica De Michele', 'MSc Student', 'students',
    $t$Master of Science in Mechatronics and Robotics Engineering Student | Bachelor’s Degree in Mechanical Engineering$t$,
-   '/people/angelica-de-michele.jpg', 'Portrait photo',
+   '/people/angelica-de-michele.jpg', 'Portrait photo', null,
    'https://www.linkedin.com/in/angelica-de-michele-5713052b5/', 75),
 
   ('nicola-creanza', 'Nicola Creanza', 'MSc Student / Lab Manager', 'students',
    $t$Master of Science in Mechatronics and Robotics Engineering Student | Bachelor’s Degree in Mechanical Engineering$t$,
-   '/people/nicola-creanza.jpg', 'Portrait photo',
+   '/people/nicola-creanza.jpg', 'Portrait photo', null,
    'https://www.linkedin.com/in/nicola-creanza-9509b7255/', 78),
 
   -- Segnaposto: le sezioni Visitors e Alumni compaiono solo se hanno righe.
   -- Il testo fra parentesi quadre dice cosa ci va; vanno sostituiti o tolti.
   ('wahei-kamimura', 'Wahei Kamimura', 'Visiting Researcher', 'visitors',
    $t$Flexible and stretchable electronics: printed circuits and deformable sensors for bioelectronics and soft robotics. Researcher in the Fukuda Research Group at Osaka University. At the lab from 24 August to 28 September 2026.$t$,
-   '/people/silhouette-man.jpg', 'Portrait not yet available', null, 110),
+   '/people/silhouette-man.jpg', 'Portrait not yet available', 'JP', null, 110),
 
   ('shinnoyo-yamada', 'Shinnoyo Yamada', 'Visiting Researcher', 'visitors',
    $t$Visiting from Waseda University, from 1 September to 29 November 2026.$t$,
-   '/people/silhouette-man.jpg', 'Portrait not yet available', null, 120),
+   '/people/silhouette-man.jpg', 'Portrait not yet available', 'JP', null, 120),
 
   -- TODO: anni nel laboratorio e posizione attuale da aggiungere alla bio.
   ('paolo-di-molfetta', 'Paolo Di Molfetta', 'MSc Student', 'alumni',
    '',
-   '/people/paolo-di-molfetta.jpg', 'Portrait photo',
+   '/people/paolo-di-molfetta.jpg', 'Portrait photo', null,
    'https://www.linkedin.com/in/paolo-di-molfetta-51b25323a/', 130)
 on conflict (slug) do update set
   name = excluded.name, role = excluded.role, role_group = excluded.role_group,
