@@ -65,7 +65,7 @@ insert into public.people (slug, name, role, role_group, bio, photo_url, photo_l
 
   ('shinnoyo-yamada', 'Shinnoyo Yamada', 'Visiting Researcher', 'visitors',
    $t$Visiting from Waseda University, from 1 September to 29 November 2026.$t$,
-   null, 'Portrait photo', null, 120),
+   '/people/silhouette-man.jpg', 'Portrait not yet available', null, 120),
 
   -- TODO: anni nel laboratorio e posizione attuale da aggiungere alla bio.
   ('paolo-di-molfetta', 'Paolo Di Molfetta', 'MSc Student', 'alumni',
