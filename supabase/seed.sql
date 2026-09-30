@@ -31,15 +31,15 @@ insert into public.people (slug, name, role, role_group, bio, photo_url, photo_l
 
   ('elisabetta-annese', 'Elisabetta Annese', 'MSc Student', 'students',
    $t$Member of the winning team at the RoboSoft Competition 2026 (Kanazawa, Japan). Thesis on soft manipulation.$t$,
-   null, 'Portrait photo', null, 80),
+   '/people/silhouette-woman.jpg', 'Portrait not yet available', null, 80),
 
   ('luca-mitaritonna', 'Luca Mitaritonna', 'MSc Student', 'students',
    $t$Member of the winning team at the RoboSoft Competition 2026 (Kanazawa, Japan). Thesis on electroadhesive grippers.$t$,
-   null, 'Portrait photo', null, 90),
+   '/people/silhouette-man.jpg', 'Portrait not yet available', null, 90),
 
   ('giuseppe-macchia', 'Giuseppe Macchia', 'MSc Student', 'students',
    $t$Member of the winning team at the RoboSoft Competition 2026 (Kanazawa, Japan). Thesis on fluidic-actuator control.$t$,
-   null, 'Portrait photo', null, 100),
+   '/people/silhouette-man.jpg', 'Portrait not yet available', null, 100),
 
   -- Bio ancora da scrivere: la card mostra nome, ruolo e link.
   ('simone-de-carolis', 'Simone De Carolis', 'Assistant Professor / RTDA', 'researchers',
@@ -61,7 +61,7 @@ insert into public.people (slug, name, role, role_group, bio, photo_url, photo_l
   -- Il testo fra parentesi quadre dice cosa ci va; vanno sostituiti o tolti.
   ('wahei-kamimura', 'Wahei Kamimura', 'Visiting Researcher', 'visitors',
    $t$Flexible and stretchable electronics: printed circuits and deformable sensors for bioelectronics and soft robotics. Researcher in the Fukuda Research Group at Osaka University. At the lab from 24 August to 28 September 2026.$t$,
-   null, 'Portrait photo', null, 110),
+   '/people/silhouette-man.jpg', 'Portrait not yet available', null, 110),
 
   ('shinnoyo-yamada', 'Shinnoyo Yamada', 'Visiting Researcher', 'visitors',
    $t$Visiting from Waseda University, from 1 September to 29 November 2026.$t$,
