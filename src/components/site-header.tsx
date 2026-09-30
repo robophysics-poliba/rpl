@@ -23,24 +23,36 @@ export function SiteHeader() {
 
   return (
     <header data-menu-aperto={aperto}>
-      <Link href="/" className="logo-lockup" aria-label={`${site.name} — home`}>
-        <Image
-          className="rpl"
-          src={asset("/rpl-logo.png")}
-          alt={site.name}
-          width={248}
-          height={101}
-          priority
-        />
-        <Image
-          className="poliba"
-          src={asset("/poliba-logo.png")}
-          alt={site.institution}
-          width={500}
-          height={240}
-          priority
-        />
-      </Link>
+      {/* Due destinazioni diverse, quindi due link separati: annidare un <a>
+          dentro un altro non è HTML valido. */}
+      <div className="logo-lockup">
+        <Link href="/" aria-label={`${site.name} — home`}>
+          <Image
+            className="rpl"
+            src={asset("/rpl-logo.png")}
+            alt={site.name}
+            width={248}
+            height={101}
+            priority
+          />
+        </Link>
+        <a
+          href="https://www.poliba.it/it/"
+          target="_blank"
+          rel="noopener"
+          aria-label={`${site.institution} (opens in a new tab)`}
+        >
+          <Image
+            className="poliba"
+            src={asset("/logo-politecnico.svg")}
+            alt={site.institution}
+            width={827}
+            height={318}
+            priority
+            unoptimized
+          />
+        </a>
+      </div>
 
       {/* Visibile solo sotto i 960px: sopra, la navigazione sta in riga. */}
       <button

@@ -13,13 +13,33 @@ const icone = {
 export function SiteFooter() {
   return (
     <footer>
-      <Image
-        className="loghi-istituzionali"
-        src={asset("/institutional-logos.png")}
-        alt="Politecnico di Bari · European Research Council"
-        width={520}
-        height={130}
-      />
+      {/* Erano un'immagine sola, con un alt che citava l'European Research
+          Council pur non mostrandolo. Separati anche perché il Politecnico
+          ora è cliccabile. */}
+      <div className="loghi-istituzionali">
+        <Image
+          className="rpl"
+          src={asset("/rpl-badge.png")}
+          alt={site.shortName}
+          width={301}
+          height={219}
+        />
+        <a
+          href="https://www.poliba.it/it/"
+          target="_blank"
+          rel="noopener"
+          aria-label={`${site.institution} (opens in a new tab)`}
+        >
+          <Image
+            className="poliba"
+            src={asset("/logo-politecnico.svg")}
+            alt={site.institution}
+            width={827}
+            height={318}
+            unoptimized
+          />
+        </a>
+      </div>
 
       <ul className="social">
         {social.map((profilo) => {
