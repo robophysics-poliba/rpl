@@ -18,6 +18,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     { url: pageUrl("/"), priority: 1 },
     ...navigation.map((item) => ({ url: pageUrl(item.href), priority: 0.8 })),
+    { url: pageUrl("/people/vito-cacucciolo"), priority: 0.7 },
     ...papers.map((paper) => ({
       url: pageUrl(`/research/${paper.slug}`),
       priority: 0.7,

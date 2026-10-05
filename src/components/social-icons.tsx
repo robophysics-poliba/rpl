@@ -27,3 +27,28 @@ export function LinkedInIcon() {
     </svg>
   );
 }
+
+/** Glifo di Google Scholar, da Simple Icons (CC0). */
+export function GoogleScholarIcon() {
+  return (
+    <svg {...comune}>
+      <path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z" />
+    </svg>
+  );
+}
+
+/**
+ * Documento, per il link al CV. Da Lucide (ISC): è disegnato a tratto, non a
+ * riempimento, da cui la classe che nel CSS toglie il fill.
+ */
+export function DocumentIcon() {
+  return (
+    <svg {...comune} className="contorno">
+      <path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" />
+      <path d="M14 2v5a1 1 0 0 0 1 1h5" />
+      <path d="M10 9H8" />
+      <path d="M16 13H8" />
+      <path d="M16 17H8" />
+    </svg>
+  );
+}

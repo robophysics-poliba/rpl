@@ -27,7 +27,7 @@ export const people: Person[] = [
     photo_url: "/people/vito-cacucciolo.jpg",
     photo_label: "Portrait photo",
     country: null,
-    profile_url: "https://www.linkedin.com/in/vito-cacucciolo/",
+    profile_url: "/people/vito-cacucciolo",
     sort_order: 10,
     published: true,
   },

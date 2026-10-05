@@ -11,7 +11,7 @@ insert into public.people (slug, name, role, role_group, bio, photo_url, photo_l
   ('vito-cacucciolo', 'Vito Cacucciolo', 'Principal Investigator', 'pi',
    $t$Professor at Politecnico di Bari (DMMM). ERC Starting Grant holder with the RoboFluid project. Co-inventor of stretchable pumps (Nature, 2019) and fiber pumps (Science, 2023). Founder of the spin-off OmniGrasp.$t$,
    '/people/vito-cacucciolo.jpg', 'Portrait photo', null,
-   'https://www.linkedin.com/in/vito-cacucciolo/', 10),
+   '/people/vito-cacucciolo', 10),
 
   ('yu-kuwajima', 'Yu Kuwajima', 'Assistant Professor / RTDA', 'researchers',
    $t$Soft pumps and electrofluidics. Co-author of the stretchable pumps (Nature, 2019); now working on electro-active fluids for wearable robotics within the RoboFluid project.$t$,

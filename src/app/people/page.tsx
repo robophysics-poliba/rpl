@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Fragment } from "react";
 
 import { Flag } from "@/components/flag";
@@ -51,15 +52,23 @@ export default async function PeoplePage() {
                       <div className="ruolo">{person.role}</div>
                       <h3>{person.name}</h3>
                       {person.bio && <p>{person.bio}</p>}
-                      {person.profile_url && (
-                        <a
-                          className="link-profilo"
-                          href={person.profile_url}
-                          target="_blank"
-                          rel="noopener"
-                        >
+                      {/* Un percorso che inizia con "/" è una pagina del sito
+                          (il profilo del PI) e si apre nella stessa scheda. */}
+                      {person.profile_url?.startsWith("/") ? (
+                        <Link className="link-profilo" href={person.profile_url}>
                           Profile →
-                        </a>
+                        </Link>
+                      ) : (
+                        person.profile_url && (
+                          <a
+                            className="link-profilo"
+                            href={person.profile_url}
+                            target="_blank"
+                            rel="noopener"
+                          >
+                            Profile →
+                          </a>
+                        )
                       )}
                     </div>
                   </article>
