@@ -1034,6 +1034,7 @@ footer .big i{font-style:normal;color:var(--signal)}
      request ready to copy and send to the addresses below.
      ========================================================= */
   var WEB3FORMS_KEY = "f726a092-37cc-4762-aa38-4a497bfadf88";
+  var CC_EMAILS = "yu.kuwajima@poliba.it; vito.cacucciolo@poliba.it";
   var CONTACT_EMAIL = "yu.kuwajima@poliba.it";   // posters and Society Challenge
   var SPONSOR_EMAIL = "yu.kuwajima@poliba.it";   // from the sponsorship brochure
 
@@ -1087,7 +1088,7 @@ footer .big i{font-style:normal;color:var(--signal)}
       var btn=form.querySelector('button[type=submit]'),label=btn.textContent;btn.disabled=true;btn.textContent="Sending…";
       var isSponsor=form.id==="sponsor-form",email=form.querySelector('input[type=email]').value.trim();
       var subject=isSponsor?"EuroEAP 2027 · Sponsorship request · "+(form.querySelector('input[name=package]:checked')||{}).value:"EuroEAP 2027 · "+document.getElementById("c-type").value+" request";
-      var payload={access_key:WEB3FORMS_KEY,subject:subject,from_name:"EuroEAP 2027 website",replyto:email};
+      var payload={access_key:WEB3FORMS_KEY,subject:subject,from_name:"EuroEAP 2027 website",replyto:email,ccemail:CC_EMAILS};
       new FormData(form).forEach(function(v,k){if(k!=="bot-field")payload[k]=v});
       (WEB3FORMS_KEY?fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(payload)}):Promise.reject(new Error("no key")))
         .then(function(res){return res.json().catch(function(){return {}}).then(function(j){if(!(res.ok&&j.success))throw new Error("not delivered")})})
