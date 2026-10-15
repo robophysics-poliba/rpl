@@ -138,16 +138,48 @@ nav .sep {
   opacity: 0.6;
   margin: 0 8px;
 }
-/* Con la settima voce (EuroEAP 2027) la riga non entra più fra 961 e circa
-   1100px: lì si stringono separatori e spaziatura. Sotto i 960px subentra il
-   menù a tendina. */
-@media (min-width: 961px) and (max-width: 1120px) {
+/* Voce EuroEAP 2027: evidenziata nel menù come bottoncino rosso */
+nav a.nav-btn-euroeap {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #d3241c;
+  color: var(--bianco);
+  padding: 4px 10px;
+  margin-left: 8px;
+  border-radius: 4px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  vertical-align: middle;
+  line-height: 1.2;
+}
+nav a.nav-btn-euroeap:hover,
+nav a.nav-btn-euroeap:focus-visible {
+  background: #b91c1c;
+  color: var(--bianco);
+  text-decoration: none;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.32);
+}
+nav a.nav-btn-euroeap:active {
+  transform: translateY(0);
+}
+/* Con la voce aggiuntiva la riga si stringe fra 961 e circa 1140px.
+   Sotto i 960px subentra il menù a tendina. */
+@media (min-width: 961px) and (max-width: 1140px) {
   nav {
     font-size: 12px;
     letter-spacing: 0.03em;
   }
   nav .sep {
-    margin: 0 5px;
+    margin: 0 4px;
+  }
+  nav a.nav-btn-euroeap {
+    padding: 3px 8px;
+    margin-left: 6px;
   }
 }
 /* Il pulsante del menù compare solo sotto i 960px (vedi il blocco responsive):
@@ -1067,6 +1099,14 @@ footer .colofone a:hover {
   }
   nav a:last-of-type {
     border-bottom: none;
+  }
+  nav a.nav-btn-euroeap {
+    margin-left: 0;
+    margin-top: 14px;
+    padding: 10px 18px;
+    border-bottom: none;
+    align-self: flex-start;
+    font-size: 14px;
   }
   nav .sep {
     display: none;

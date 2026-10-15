@@ -77,18 +77,31 @@ export function SiteHeader() {
           // /research resta attiva anche sugli approfondimenti /research/[slug].
           const attiva =
             pathname === item.href || pathname.startsWith(`${item.href}/`);
+          const isButton = "isButton" in item && Boolean(item.isButton);
 
           return (
             <Fragment key={item.href}>
-              {index > 0 && <span className="sep">|</span>}
+              {index > 0 && !isButton && <span className="sep">|</span>}
               {"staticPage" in item ? (
                 // Pagina HTML statica in public/: non è una rotta di Next,
                 // quindi niente <Link> (e il prefisso lo aggiunge asset()).
-                <a href={asset(item.href)}>{item.label}</a>
+                <a
+                  href={asset(item.href)}
+                  className={isButton ? "nav-btn-euroeap" : undefined}
+                  onClick={() => setAperto(false)}
+                >
+                  {item.label}
+                </a>
               ) : (
                 <Link
                   href={item.href}
-                  className={attiva ? "attiva" : undefined}
+                  className={
+                    attiva
+                      ? "attiva"
+                      : isButton
+                        ? "nav-btn-euroeap"
+                        : undefined
+                  }
                   aria-current={attiva ? "page" : undefined}
                   // Chiude il pannello: altrimenti resterebbe aperto sopra la
                   // pagina appena raggiunta.

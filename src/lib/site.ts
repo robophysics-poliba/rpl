@@ -92,8 +92,9 @@ export const navigation = [
    * Sito della conferenza EuroEAP 2027: una pagina HTML a sé, in
    * public/euroeap2027/, con la sua grafica. Non è una rotta di Next, quindi
    * header e footer la linkano con un <a> normale (vedi `staticPage`).
+   * Nel menù principale dell'header è evidenziata come bottoncino rosso (vedi `isButton`).
    */
-  { href: "/euroeap2027/", label: "EuroEAP 2027", staticPage: true },
+  { href: "/euroeap2027/", label: "EuroEAP 2027", staticPage: true, isButton: true },
 ] as const;
 
 /** Intestazioni dei gruppi in /people, nell'ordine di visualizzazione. */
