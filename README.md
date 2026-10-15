@@ -271,3 +271,29 @@ generano una pagina statica per riga tramite `generateStaticParams`.
 - **Form contatti.** Su GitHub Pages non funziona: è una Server Action e il
   sito è statico. Il codice è in `src/app/contacts/_form-disabilitato/`, con
   le istruzioni per riattivarlo su un hosting che esegua Next.js.
+
+## EuroEAP 2027
+
+Il sito della conferenza è in `public/euroeap2027/` ed è online su
+<https://robophysics.poliba.it/euroeap2027/>. È una pagina HTML a sé, con la
+sua grafica: Next la copia così com'è nel build statico, senza passare dai
+componenti del sito RPL. La voce "EuroEAP 2027" nel menu viene da
+`navigation` in `src/lib/site.ts` (con `staticPage: true`, quindi un `<a>`
+normale invece di `<Link>`).
+
+| File | Cosa contiene |
+| ---- | ------------- |
+| `index.html` | la pagina; testi, relatori e foto si modificano qui |
+| `EuroEAP2027-sponsorship.pdf` | prospetto sponsor scaricabile |
+| `fonts/` | i caratteri, serviti dal sito (nessuna richiesta a Google Fonts) |
+
+Da modificare in `index.html` (cercare il commento in maiuscolo):
+
+- `CONTENT TO FILL IN` — relatori (`SPEAKERS`) e foto (`GALLERY`); le foto
+  vanno in `speakers/` e `gallery/` dentro la stessa cartella.
+- `SHOW_GALLERY` — a `true` dopo l'evento per mostrare la gallery.
+- `FORMS` — i moduli (poster, Society Challenge, sponsor) inviano email con
+  Web3Forms: la chiave gratuita si crea su web3forms.com con
+  yu.kuwajima@poliba.it e va incollata in `WEB3FORMS_KEY`. Finché manca, il
+  sito mostra la richiesta pronta da copiare e inviare per email.
+

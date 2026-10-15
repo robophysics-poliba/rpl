@@ -84,7 +84,11 @@ export function SiteFooter() {
           {navigation.map((item, i) => (
             <Fragment key={item.href}>
               {i > 0 && " | "}
-              <Link href={item.href}>{item.label}</Link>
+              {"staticPage" in item ? (
+                <a href={asset(item.href)}>{item.label}</a>
+              ) : (
+                <Link href={item.href}>{item.label}</Link>
+              )}
             </Fragment>
           ))}
         </span>

@@ -81,16 +81,22 @@ export function SiteHeader() {
           return (
             <Fragment key={item.href}>
               {index > 0 && <span className="sep">|</span>}
-              <Link
-                href={item.href}
-                className={attiva ? "attiva" : undefined}
-                aria-current={attiva ? "page" : undefined}
-                // Chiude il pannello: altrimenti resterebbe aperto sopra la
-                // pagina appena raggiunta.
-                onClick={() => setAperto(false)}
-              >
-                {item.label}
-              </Link>
+              {"staticPage" in item ? (
+                // Pagina HTML statica in public/: non è una rotta di Next,
+                // quindi niente <Link> (e il prefisso lo aggiunge asset()).
+                <a href={asset(item.href)}>{item.label}</a>
+              ) : (
+                <Link
+                  href={item.href}
+                  className={attiva ? "attiva" : undefined}
+                  aria-current={attiva ? "page" : undefined}
+                  // Chiude il pannello: altrimenti resterebbe aperto sopra la
+                  // pagina appena raggiunta.
+                  onClick={() => setAperto(false)}
+                >
+                  {item.label}
+                </Link>
+              )}
             </Fragment>
           );
         })}

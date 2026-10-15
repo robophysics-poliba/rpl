@@ -138,8 +138,20 @@ nav .sep {
   opacity: 0.6;
   margin: 0 8px;
 }
+/* Con la settima voce (EuroEAP 2027) la riga non entra più fra 961 e circa
+   1100px: lì si stringono separatori e spaziatura. Sotto i 960px subentra il
+   menù a tendina. */
+@media (min-width: 961px) and (max-width: 1120px) {
+  nav {
+    font-size: 12px;
+    letter-spacing: 0.03em;
+  }
+  nav .sep {
+    margin: 0 5px;
+  }
+}
 /* Il pulsante del menù compare solo sotto i 960px (vedi il blocco responsive):
-   sopra, le sei voci stanno comodamente in riga. */
+   sopra, le voci stanno in riga. */
 .apri-menu {
   display: none;
   border: 0;
