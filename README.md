@@ -297,3 +297,15 @@ Da modificare in `index.html` (cercare il commento in maiuscolo):
   yu.kuwajima@poliba.it e va incollata in `WEB3FORMS_KEY`. Finché manca, il
   sito mostra la richiesta pronta da copiare e inviare per email.
 
+### Registro delle richieste
+
+Ogni richiesta, oltre all'email, diventa una riga del Foglio Google
+"EuroEAP 2027 · Richieste", condiviso fra gli organizzatori: una scheda per
+Poster, Society Challenge e Sponsor, una scheda Riepilogo con i contatori, e
+lo stato di ogni richiesta (Nuova, Da ricontattare, Confermata, Annullata)
+da un menu a tendina.
+
+Il foglio riceve le righe da uno script Apps Script pubblicato come app web:
+il codice, con le istruzioni di installazione in testa, è in
+`docs/euroeap2027-registro.gs`. L'URL dell'app web (finisce con
+`/exec`) va in `public/euroeap2027/config.js`, alla voce `sheetsWebhookUrl`.
