@@ -436,6 +436,18 @@ footer .big i{font-style:normal;color:var(--signal)}
 .field{display:flex;flex-direction:column;gap:.35rem;min-width:0}
 .field label,.tiers legend{font:500 .72rem/1.3 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
 .field label span{text-transform:none;letter-spacing:0;opacity:.8}
+.poster-only{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--s-4)}
+.poster-only[hidden]{display:none}
+.poster-only .check{grid-column:1/-1}
+@media (max-width:560px){.poster-only{grid-template-columns:minmax(0,1fr)}}
+.field select{font:inherit;font-size:1rem;color:var(--ink);background:var(--ground);border:1px solid var(--line);border-radius:8px;padding:.7rem .6rem;width:100%;min-width:0}
+.field.err select{border-color:var(--signal)}
+fieldset.radios{border:0;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;align-content:flex-start}
+fieldset.radios legend{font:500 .72rem/1.3 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);padding:0;margin-bottom:.55rem;width:100%}
+fieldset.radios{flex-direction:row}
+fieldset.radios label{display:inline-flex;align-items:center;gap:.4rem;cursor:pointer;font:400 .95rem/1.4 var(--f-body);letter-spacing:0;text-transform:none;color:var(--ink)}
+fieldset.radios input{accent-color:var(--signal);width:18px;height:18px}
+fieldset.radios.err legend{color:var(--signal)}
 .field input,.field textarea{font:inherit;font-size:1rem;color:var(--ink);background:var(--ground);border:1px solid var(--line);border-radius:8px;padding:.7rem .8rem;width:100%;min-width:0}
 .field textarea{resize:vertical}
 .field input:focus,.field textarea:focus{outline:none;border-color:var(--ink);box-shadow:0 0 0 3px color-mix(in srgb,var(--signal) 25%,transparent)}
@@ -870,7 +882,42 @@ footer .big i{font-style:normal;color:var(--signal)}
       <div class="field"><label for="c-country">Country *</label><input id="c-country" name="country" required autocomplete="country-name"></div>
       <div class="field full"><label for="c-email">Email *</label><input id="c-email" name="email" type="email" required autocomplete="email"></div>
       <div class="field full"><label for="c-coauth">Co-authors <span>optional</span></label><input id="c-coauth" name="co_authors" placeholder="Name Surname (Affiliation), …"></div>
-      <div class="field full"><label for="c-abs" id="c-abs-label">Short abstract <span>optional · max 1500 characters</span></label><textarea id="c-abs" name="abstract" rows="4" maxlength="1500"></textarea></div>
+      <div class="field full"><label for="c-abs" id="c-abs-label">Short abstract <span>optional · max 1500 characters</span></label><textarea id="c-abs" name="abstract" rows="5" maxlength="1500"></textarea></div>
+      <div class="poster-only full" id="f-poster">
+        <div class="field"><label for="c-kw">Keywords * <span>3–5, separated by commas</span></label><input id="c-kw" name="keywords" maxlength="200" placeholder="e.g. dielectric elastomers, soft robotics, haptics" data-req></div>
+        <div class="field"><label for="c-topic">Main topic *</label>
+          <select id="c-topic" name="topic" data-req>
+            <option value="">Choose the topic that fits best</option>
+            <optgroup label="Technologies">
+              <option>Dielectric elastomers (DEA)</option>
+              <option>HASEL and electrohydraulic actuators</option>
+              <option>Electrohydrodynamic devices</option>
+              <option>Ionic polymers</option>
+              <option>Liquid crystal elastomers</option>
+              <option>Shape memory materials</option>
+              <option>Other soft transducers</option>
+            </optgroup>
+            <optgroup label="Applications">
+              <option>Soft robotics</option>
+              <option>Haptics</option>
+              <option>Biomedical systems</option>
+              <option>Wearables and smart textiles</option>
+              <option>Optics</option>
+              <option>Energy harvesting</option>
+            </optgroup>
+            <optgroup label="Expertise">
+              <option>Materials development</option>
+              <option>Device manufacturing</option>
+              <option>Modelling and simulation</option>
+              <option>Control</option>
+            </optgroup>
+          </select></div>
+        <fieldset class="field radios" id="f-student"><legend>Are you a student (BSc, MSc or PhD)? *</legend>
+          <label for="c-stu-y"><input type="radio" id="c-stu-y" name="student" value="Yes" data-req> Yes</label>
+          <label for="c-stu-n"><input type="radio" id="c-stu-n" name="student" value="No"> No</label>
+        </fieldset>
+        <label class="check" for="c-pub"><input type="checkbox" id="c-pub" name="publication_consent" value="yes" data-req><span>I agree that the title and abstract may be published in the EuroEAP 2027 book of abstracts and on the conference website. *</span></label>
+      </div>
       <label class="check full" for="c-consent"><input type="checkbox" id="c-consent" name="consent" value="yes" required><span>I agree that the organisers of EuroEAP 2027 use these data to handle my request and contact me about the conference. *</span></label>
       <div class="form-ft full"><span class="req">* required</span><button type="submit" class="btn">Send request</button></div>
     </form>
@@ -1051,8 +1098,8 @@ footer .big i{font-style:normal;color:var(--signal)}
   });
   var cm=document.getElementById("contrib-modal"),sm=document.getElementById("sponsor-modal");
   var CONTRIB={
-    poster:{type:"Poster",eyebrow:"Posters · A0 · deadline 20 May 2027",title:"Submit a poster",label:"Poster title *",abs:"Short abstract"},
-    challenge:{type:"Society Challenge",eyebrow:"Society Challenge · Wed 9 June · deadline 20 May 2027",title:"Enter the Society Challenge",label:"Title of your demo *",abs:"What will you show, and why does it matter for society?"}
+    poster:{type:"Poster",eyebrow:"Posters · A0 · deadline 20 May 2027",title:"Submit a poster",label:"Poster title *",abs:"Abstract *",absNote:"max 1500 characters",absReq:true,kw:true},
+    challenge:{type:"Society Challenge",eyebrow:"Society Challenge · Wed 9 June · deadline 20 May 2027",title:"Enter the Society Challenge",label:"Title of your demo *",abs:"What will you show, and why does it matter for society?",absNote:"optional · max 1500 characters",absReq:false,kw:false}
   };
   document.querySelectorAll("[data-open-contrib]").forEach(function(b){b.addEventListener("click",function(){
     var c=CONTRIB[b.getAttribute("data-open-contrib")];
@@ -1060,7 +1107,12 @@ footer .big i{font-style:normal;color:var(--signal)}
     document.getElementById("contrib-eyebrow").textContent=c.eyebrow;
     document.getElementById("contrib-title").textContent=c.title;
     document.getElementById("c-title-label").textContent=c.label;
-    document.getElementById("c-abs-label").innerHTML=c.abs+' <span>optional · max 1500 characters</span>';
+    document.getElementById("c-abs-label").innerHTML=c.abs+' <span>'+c.absNote+'</span>';
+    document.getElementById("c-abs").required=c.absReq;
+    // Poster-only fields (keywords, topic, student, publication consent): hidden and not required for the Society Challenge.
+    var pb=document.getElementById("f-poster");pb.hidden=!c.kw;
+    pb.querySelectorAll("[data-req]").forEach(function(el){el.required=c.kw});
+    if(!c.kw)pb.querySelectorAll("input,select").forEach(function(el){if(el.type==="radio"||el.type==="checkbox")el.checked=false;else el.value=""});
     openModal(cm);
   })});
   document.querySelectorAll("[data-open-sponsor]").forEach(function(b){b.addEventListener("click",function(){openModal(sm)})});
@@ -1069,15 +1121,17 @@ footer .big i{font-style:normal;color:var(--signal)}
     var ok=true,first=null;
     form.querySelectorAll(".err").forEach(function(x){x.classList.remove("err")});
     form.querySelectorAll(".msg").forEach(function(x){x.remove()});
-    form.querySelectorAll("input[required],textarea[required]").forEach(function(el){
+    form.querySelectorAll("input[required],textarea[required],select[required]").forEach(function(el){
       if(el.type==="radio"){return}
       var bad=el.type==="checkbox"?!el.checked:!el.value.trim()||(el.type==="email"&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim()));
       if(bad){ok=false;first=first||el;
         if(el.type==="checkbox"){el.closest(".check").classList.add("err")}
-        else{var f=el.closest(".field");f.classList.add("err");var m=document.createElement("span");m.className="msg";m.textContent=el.type==="email"&&el.value.trim()?"Enter a valid email address, like name@university.eu":"Fill in this field";f.appendChild(m)}}
+        else{var f=el.closest(".field");f.classList.add("err");var m=document.createElement("span");m.className="msg";m.textContent=el.type==="email"&&el.value.trim()?"Enter a valid email address, like name@university.eu":el.tagName==="SELECT"?"Choose an option":"Fill in this field";f.appendChild(m)}}
     });
-    var radios=form.querySelectorAll('input[type=radio][required]');
-    if(radios.length){var name=radios[0].name;if(!form.querySelector('input[name="'+name+'"]:checked')){ok=false;var fs=form.querySelector(".tiers");fs.classList.add("err");first=first||form.querySelector('input[name="'+name+'"]')}}
+    form.querySelectorAll('input[type=radio][required]').forEach(function(r){
+      if(form.querySelector('input[name="'+r.name+'"]:checked'))return;
+      ok=false;var fs=r.closest("fieldset");if(fs)fs.classList.add("err");first=first||r;
+    });
     if(first){first.focus({preventScroll:false})}
     return ok;
   }
@@ -1093,7 +1147,7 @@ footer .big i{font-style:normal;color:var(--signal)}
     if(form.id==="sponsor-form"){
       row={type:"sponsor",package:d.package,organisation:d.organisation,website:d.website,contact_name:d.contact_name,role:d.role,email:d.email,phone:d.phone,message:d.message};
     }else{
-      row={type:d.type==="Society Challenge"?"challenge":"poster",title:d.title,first_name:d.first_name,last_name:d.last_name,affiliation:d.affiliation,country:d.country,email:d.email,co_authors:d.co_authors,abstract:d.abstract};
+      row={type:d.type==="Society Challenge"?"challenge":"poster",title:d.title,first_name:d.first_name,last_name:d.last_name,affiliation:d.affiliation,country:d.country,email:d.email,co_authors:d.co_authors,abstract:d.abstract,keywords:d.keywords,topic:d.topic,student:d.student,publication_consent:d.publication_consent==="yes"?"Yes":""};
     }
     // text/plain keeps this a "simple" request: Apps Script can't answer a CORS preflight.
     return fetch(SHEETS_WEBHOOK,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(row)})

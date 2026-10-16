@@ -27,14 +27,21 @@
  * Esegui il deployment > Gestisci deployment > modifica > Nuova versione.
  */
 
+var TEMI = [
+  'Dielectric elastomers (DEA)', 'HASEL and electrohydraulic actuators', 'Electrohydrodynamic devices',
+  'Ionic polymers', 'Liquid crystal elastomers', 'Shape memory materials', 'Other soft transducers',
+  'Soft robotics', 'Haptics', 'Biomedical systems', 'Wearables and smart textiles', 'Optics', 'Energy harvesting',
+  'Materials development', 'Device manufacturing', 'Modelling and simulation', 'Control'
+];
+
 var STATI = ['Nuova', 'Da ricontattare', 'Confermata', 'Annullata'];
 var COLORI = { 'Nuova': '#E3ECFD', 'Da ricontattare': '#FCEFD9', 'Confermata': '#DEF3E5', 'Annullata': '#E7E9EC' };
 
 var SCHEDE = {
   poster: {
     nome: 'Poster',
-    colonne: ['Ricevuta', 'Stato', 'Note', 'Titolo del poster', 'Nome', 'Cognome', 'Affiliazione', 'Paese', 'Email', 'Coautori', 'Abstract'],
-    campi:   [null, null, null, 'title', 'first_name', 'last_name', 'affiliation', 'country', 'email', 'co_authors', 'abstract']
+    colonne: ['Ricevuta', 'Stato', 'Note', 'Titolo del poster', 'Nome', 'Cognome', 'Affiliazione', 'Paese', 'Email', 'Coautori', 'Abstract', 'Keywords', 'Tema', 'Studente', 'Consenso pubblicazione'],
+    campi:   [null, null, null, 'title', 'first_name', 'last_name', 'affiliation', 'country', 'email', 'co_authors', 'abstract', 'keywords', 'topic', 'student', 'publication_consent']
   },
   challenge: {
     nome: 'Society Challenge',
@@ -110,8 +117,10 @@ function setup() {
   // ------------------------------------------------------------ Riepilogo
   var r = ss.getSheetByName('Riepilogo') || ss.insertSheet('Riepilogo', 0);
   r.getCharts().forEach(function (c) { r.removeChart(c); });
-  r.getRange('A1:J40').breakApart();
+  r.getRange('A1:J60').breakApart();
   r.clear();
+  var S = separatore(r);   // ',' o ';' secondo la lingua del foglio
+  var F = function (x) { return x.replace(/,/g, S); };
   r.setHiddenGridlines(true);
   r.setColumnWidth(1, 190);
   for (var c = 2; c <= 7; c++) r.setColumnWidth(c, 150);
@@ -133,11 +142,13 @@ function setup() {
   tessere.forEach(function (t, i) {
     var col = i + 1;
     r.getRange(4, col).setValue(t[0]).setFontSize(9).setFontWeight('bold');
-    r.getRange(5, col).setFormula(t[1]).setFontSize(30).setFontWeight('bold');
+    r.getRange(5, col).setFormula(F(t[1])).setFontSize(30).setFontWeight('bold');
     r.getRange(6, col).setFormula(t[2]).setFontSize(9);
     r.getRange(4, col, 3, 1).setBackground(t[3]).setFontColor(t[4]).setHorizontalAlignment('left')
       .setBorder(true, true, true, true, false, false, '#FFFFFF', SpreadsheetApp.BorderStyle.SOLID_THICK);
   });
+  // Formati espliciti: senza, Sheets può ereditare il formato € da celle vicine.
+  r.getRange('A5:E5').setNumberFormat('0');
   r.getRange('F5').setNumberFormat('#,##0 "€"');
   r.setRowHeight(4, 26); r.setRowHeight(5, 56); r.setRowHeight(6, 26);
 
@@ -150,25 +161,26 @@ function setup() {
     r.getRange(n, 1, 1, 7).setFormulas([[
       '="' + nome + '"',
       '=COUNTA(' + t + 'A2:A)',
-      '=COUNTIF(' + t + 'B2:B,"Nuova")',
-      '=COUNTIF(' + t + 'B2:B,"Da ricontattare")',
-      '=COUNTIF(' + t + 'B2:B,"Confermata")',
-      '=COUNTIF(' + t + 'B2:B,"Annullata")',
+      F('=COUNTIF(' + t + 'B2:B,"Nuova")'),
+      F('=COUNTIF(' + t + 'B2:B,"Da ricontattare")'),
+      F('=COUNTIF(' + t + 'B2:B,"Confermata")'),
+      F('=COUNTIF(' + t + 'B2:B,"Annullata")'),
       '=C' + n + '+D' + n
     ]]);
   });
   r.getRange('A12:G12').setFormulas([['="Totale"', '=SUM(B9:B11)', '=SUM(C9:C11)', '=SUM(D9:D11)', '=SUM(E9:E11)', '=SUM(F9:F11)', '=SUM(G9:G11)']])
     .setFontWeight('bold').setBorder(true, null, null, null, null, null, '#0F1318', SpreadsheetApp.BorderStyle.SOLID);
-  r.getRange('B9:G12').setHorizontalAlignment('center');
+  r.getRange('B9:G12').setHorizontalAlignment('center').setNumberFormat('0');
   r.getRange('A13').setValue('Sponsor in trattativa (€)').setFontColor('#4B535E');
-  r.getRange('B13').setFormula("=SUMIF('Sponsor'!B2:B,\"Nuova\",'Sponsor'!E2:E)+SUMIF('Sponsor'!B2:B,\"Da ricontattare\",'Sponsor'!E2:E)")
-    .setNumberFormat('#,##0').setHorizontalAlignment('center').setFontColor('#4B535E');
+  r.getRange('B13').setFormula(F("=SUMIF('Sponsor'!B2:B,\"Nuova\",'Sponsor'!E2:E)+SUMIF('Sponsor'!B2:B,\"Da ricontattare\",'Sponsor'!E2:E)"))
+    .setNumberFormat('#,##0 "€"').setHorizontalAlignment('center').setFontColor('#4B535E');
 
   // Dati per la ciambella (colonne I-J).
   r.getRange('I8:J8').setValues([['Stato', 'Richieste']]).setFontWeight('bold').setFontColor('#9AA1AA');
   r.getRange('I9:J12').setFormulas([
     ['="Nuove"', '=C12'], ['="Da ricontattare"', '=D12'], ['="Confermate"', '=E12'], ['="Annullate"', '=F12']
   ]).setFontColor('#9AA1AA');
+  r.getRange('J9:J12').setNumberFormat('0');
 
   var colori = ['#2F6FEB', '#E08A00', '#1E8449', '#9AA1AA'];
   r.insertChart(r.newChart()
@@ -179,6 +191,7 @@ function setup() {
     .setOption('colors', colori)
     .setOption('title', 'Richieste per categoria e stato')
     .setOption('legend', { position: 'bottom' })
+    .setOption('hAxis', { format: '0', minValue: 0, viewWindow: { min: 0 } })
     .setOption('width', 640).setOption('height', 320)
     .setPosition(15, 1, 0, 0)
     .build());
@@ -194,12 +207,61 @@ function setup() {
     .setPosition(15, 5, 20, 0)
     .build());
 
+  // ------------------------------------------- Poster: studenti e temi (da riga 34)
+  // Nella scheda Poster: M = Tema, N = Studente, O = Consenso pubblicazione.
+  // Si contano i poster non annullati.
+  var P = "'Poster'!";
+  r.getRange('A14').setValue('Poster di studenti').setFontColor('#4B535E');
+  r.getRange('B14').setFormula(F('=COUNTIFS(' + P + 'N2:N,"Yes",' + P + 'B2:B,"<>Annullata")'))
+    .setNumberFormat('0').setHorizontalAlignment('center').setFontColor('#4B535E');
+
+  var t0 = 34;
+  r.getRange(t0 - 1, 1).setValue('Poster per tema (esclusi gli annullati)').setFontSize(13).setFontWeight('bold');
+  r.getRange(t0, 1, 1, 4).setValues([['Tema', 'Poster', 'di cui studenti', 'Confermati']])
+    .setFontWeight('bold').setBackground('#0F1318').setFontColor('#FFFFFF');
+  TEMI.forEach(function (tema, i) {
+    var n = t0 + 1 + i, q = '"' + tema + '"';
+    r.getRange(n, 1, 1, 4).setFormulas([[
+      '="' + tema + '"',
+      F('=COUNTIFS(' + P + 'M2:M,' + q + ',' + P + 'B2:B,"<>Annullata")'),
+      F('=COUNTIFS(' + P + 'M2:M,' + q + ',' + P + 'N2:N,"Yes",' + P + 'B2:B,"<>Annullata")'),
+      F('=COUNTIFS(' + P + 'M2:M,' + q + ',' + P + 'B2:B,"Confermata")')
+    ]]);
+    if (i === 7 || i === 13) r.getRange(n, 1, 1, 4).setBorder(true, null, null, null, null, null, '#CDD2D9', SpreadsheetApp.BorderStyle.SOLID);
+  });
+  var tFine = t0 + TEMI.length, tTot = tFine + 1;
+  r.getRange(tTot, 1, 1, 4).setFormulas([['="Totale"', '=SUM(B' + (t0 + 1) + ':B' + tFine + ')', '=SUM(C' + (t0 + 1) + ':C' + tFine + ')', '=SUM(D' + (t0 + 1) + ':D' + tFine + ')']])
+    .setFontWeight('bold').setBorder(true, null, null, null, null, null, '#0F1318', SpreadsheetApp.BorderStyle.SOLID);
+  r.getRange(t0 + 1, 2, TEMI.length + 1, 3).setNumberFormat('0').setHorizontalAlignment('center');
+  r.getRange(tTot + 1, 1).setValue('Gruppi: tecnologie (prime 7 righe), applicazioni (6), competenze (4).').setFontColor('#9AA1AA').setFontSize(9);
+
+  r.insertChart(r.newChart()
+    .setChartType(Charts.ChartType.BAR)
+    .addRange(r.getRange(t0, 1, TEMI.length + 1, 1)).addRange(r.getRange(t0, 2, TEMI.length + 1, 2))
+    .setNumHeaders(1)
+    .setOption('colors', ['#0F1318', '#D3241C'])
+    .setOption('title', 'Poster per tema')
+    .setOption('legend', { position: 'bottom' })
+    .setOption('hAxis', { format: '0', minValue: 0, viewWindow: { min: 0 } })
+    .setOption('width', 560).setOption('height', 440)
+    .setPosition(t0 - 1, 6, 10, 0)
+    .build());
+
   var vuota = ss.getSheetByName('Foglio1') || ss.getSheetByName('Sheet1');
   if (vuota && vuota.getLastRow() === 0) ss.deleteSheet(vuota);
   ss.setActiveSheet(r);
 }
 
 /* ------------------------------------------------------------------ utilità */
+/** Separatore degli argomenti delle formule: ',' in inglese, ';' in italiano. */
+function separatore(foglio) {
+  var c = foglio.getRange('Z1');
+  c.setFormula('=SUM(1,2)');
+  SpreadsheetApp.flush();
+  var virgola = c.getValue() === 3;
+  c.clearContent();
+  return virgola ? ',' : ';';
+}
 function regolaStati() {
   return SpreadsheetApp.newDataValidation().requireValueInList(STATI, true).setAllowInvalid(false).build();
 }
