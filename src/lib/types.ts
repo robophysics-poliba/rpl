@@ -58,6 +58,13 @@ export type Paper = {
   summary: string;
   abstract: string;
   external_url: string | null;
+  /**
+   * Versione ad accesso libero (preprint su Zenodo), se c'è: le didascalie
+   * delle figure rimandano qui invece che alla pagina dell'editore.
+   */
+  open_access_url: string | null;
+  /** Nota accanto a rivista e anno nelle card di /research. */
+  badge_note: string | null;
   external_label: string;
   extra_url: string | null;
   extra_label: string | null;
@@ -119,6 +126,8 @@ export type Video = {
   date_label: string;
   description: string;
   thumb_label: string;
+  /** Slug del paper da cui viene il video, per la didascalia con la fonte. */
+  paper_slug: string | null;
   sort_order: number;
   published: boolean;
 };

@@ -3,9 +3,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { Media } from "@/components/media";
+import { SourceCredit } from "@/components/source-credit";
 import { Button, OfflineNotice } from "@/components/ui";
 import { VideoEmbed } from "@/components/video-embed";
 import { getPaperBySlug, getPapers } from "@/lib/queries";
+import { paperSource } from "@/lib/sources";
 
 export const revalidate = 300;
 
@@ -43,6 +45,9 @@ export default async function PaperPage(props: PageProps<"/research/[slug]">) {
   ]);
 
   if (!paper) notFound();
+
+  // Le figure di questa pagina vengono dal paper stesso.
+  const source = paperSource(paper);
 
   const index = papers.findIndex((p) => p.slug === paper.slug);
   const previous = index > 0 ? papers[index - 1] : null;
@@ -95,7 +100,9 @@ export default async function PaperPage(props: PageProps<"/research/[slug]">) {
                     fallbackLabel={section.label}
                   />
                 </div>
-                <figcaption className="didascalia">{section.caption}</figcaption>
+                <figcaption className="didascalia">
+                  {section.caption} <SourceCredit source={source} />
+                </figcaption>
               </figure>
             );
           }
@@ -108,7 +115,10 @@ export default async function PaperPage(props: PageProps<"/research/[slug]">) {
                 width={section.width}
                 height={section.height}
               />
-              <figcaption className="didascalia">{section.caption}</figcaption>
+              <figcaption className="didascalia">
+                {section.caption}{" "}
+                {section.url && <SourceCredit source={source} />}
+              </figcaption>
             </figure>
           );
         })}

@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import Image from "next/image";
 
 import { LatestNews } from "@/components/latest-news";
+import { SourceCredit } from "@/components/source-credit";
 import { Button, OfflineNotice } from "@/components/ui";
 import { VideoEmbed } from "@/components/video-embed";
 import { getNews, getPapers } from "@/lib/queries";
 import { asset, site } from "@/lib/site";
+import { sourceFor } from "@/lib/sources";
 
 export const revalidate = 300;
 
@@ -25,6 +27,9 @@ export default async function HomePage() {
   const { data: papers } = papersResult;
   const { data: news } = newsResult;
   const latest = papers[0];
+  // Animazione, video e foto della home vengono tutti dal paper su Science
+  // Robotics: la didascalia sotto ciascuno lo cita.
+  const efm = sourceFor(papers, "electrofluidic-fiber-muscles");
 
   // Basta che una delle due sia ripiegata sui contenuti offline perché
   // l'avviso in fondo alla pagina abbia senso.
@@ -85,13 +90,18 @@ export default async function HomePage() {
           <div className="illustrazione">
             {/* Animata: Next non ottimizza le immagini animate, quindi il file
                 è già stato ridotto e convertito in WebP a monte. */}
-            <Image
-              src={asset("/untethered-woven.webp")}
-              alt="An untethered woven muscle pair contracting and extending in a loop"
-              width={760}
-              height={428}
-              unoptimized
-            />
+            <figure>
+              <Image
+                src={asset("/untethered-woven.webp")}
+                alt="An untethered woven muscle pair contracting and extending in a loop"
+                width={760}
+                height={428}
+                unoptimized
+              />
+              <figcaption>
+                <SourceCredit source={efm} />
+              </figcaption>
+            </figure>
           </div>
         </div>
       </div>
@@ -118,16 +128,19 @@ export default async function HomePage() {
           </p>
         </div>
         <div className="colonna-video">
-          <VideoEmbed
-            youtubeId="_tOTOjzNouU"
-            start={6}
-            title="Electrofluidic Fiber Muscles, Science Robotics, 2026"
-            fallbackLabel={"Video still — woven muscle pair\n(side view)"}
-          >
-            <span className="tag tr">side view</span>
-            <span className="tag bl">1x speed</span>
-            <span className="tag br">10 cm</span>
-          </VideoEmbed>
+          <div className="schermo">
+            <VideoEmbed
+              youtubeId="_tOTOjzNouU"
+              start={6}
+              title="Electrofluidic Fiber Muscles, Science Robotics, 2026"
+              fallbackLabel={"Video still — woven muscle pair\n(side view)"}
+            >
+              <span className="tag tr">side view</span>
+              <span className="tag bl">1x speed</span>
+              <span className="tag br">10 cm</span>
+            </VideoEmbed>
+          </div>
+          <SourceCredit source={efm} />
         </div>
       </section>
 
@@ -140,6 +153,7 @@ export default async function HomePage() {
             height={1176}
             sizes="(max-width: 960px) 100vw, 55vw"
           />
+          <SourceCredit source={efm} />
         </div>
         <div className="testo">
           <p className="claim">

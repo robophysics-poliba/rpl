@@ -225,7 +225,7 @@ export const papers: Paper[] = [
     title: "Electrofluidic fiber muscles",
     journal: "Science Robotics",
     year: 2026,
-    authors_short: "Kilic Afsar, Pupillo, Vitucci, Babatain, Ishii, Cacucciolo.",
+    authors_short: "Afsar, Pupillo, Vitucci, Babatain, Ishii, Cacucciolo.",
     authors_full:
       "O. Kilic Afsar, G. Pupillo, G. Vitucci, W. Babatain, H. Ishii, V. Cacucciolo",
     citation:
@@ -235,6 +235,8 @@ export const papers: Paper[] = [
     abstract:
       "A new class of fiber-format artificial muscles integrating charge-injection fiber pumps and McKibben actuators in a closed circuit — electric, silent and untethered, with a power density comparable to skeletal muscle.",
     external_url: "https://www.science.org/doi/10.1126/scirobotics.ady6438",
+    open_access_url: "https://zenodo.org/records/17902764",
+    badge_note: null,
     external_label: "Paper on Science Robotics",
     extra_url: "https://www.media.mit.edu/projects/electrofluidicmuscle/overview/",
     extra_label: "Project at the MIT Media Lab",
@@ -312,6 +314,8 @@ export const papers: Paper[] = [
     abstract:
       "A soft 2 mm tube with helical electrodes embedded in the wall, produced continuously and weavable like a thread — bringing pressurised fluidic circuits directly into garments for thermoregulation, muscle support and haptic feedback.",
     external_url: "https://www.science.org/doi/10.1126/science.ade8654",
+    open_access_url: null,
+    badge_note: "When Vito was at EPFL-LMTS",
     external_label: "Paper on Science",
     extra_url: null,
     extra_label: null,
@@ -320,10 +324,9 @@ export const papers: Paper[] = [
     media_width: 1920,
     media_height: 1080,
     facts: [
-      { value: "2 mm", label: "in diameter: a pump in the form of a thread" },
-      { value: "∞", label: "continuous fabrication, cut to length" },
-      { value: "100%", label: "weavable: sewn, braided, worn" },
-      { value: "0 dB*", label: "silent operation, no moving parts" },
+      { value: "100 kPa/m", label: "pressure per metre: proportional to fiber length" },
+      { value: "2 mm", label: "in diameter: flexible, sewn and woven into textiles" },
+      { value: "200 ms", label: "to reach maximum stable pressure" },
     ],
     sections: [
       { type: "heading", text: "The problem" },
@@ -378,6 +381,8 @@ export const papers: Paper[] = [
     abstract:
       "The world's first fully soft, stretchable pump: it converts electricity directly into flow through electrohydrodynamics, with no moving parts — the result that opened the way to fluidic muscles free of external infrastructure.",
     external_url: "https://www.nature.com/articles/s41586-019-1479-6",
+    open_access_url: null,
+    badge_note: "When Vito was at EPFL-LMTS",
     external_label: "Paper on Nature",
     extra_url: null,
     extra_label: null,
@@ -592,6 +597,7 @@ export const videos: Video[] = [
     description:
       "Antagonistic woven muscle pairs contracting and extending — the work published in Science Robotics with the MIT Media Lab.",
     thumb_label: "YouTube — electrofluidic fiber muscles",
+    paper_slug: "electrofluidic-fiber-muscles",
     sort_order: 10,
     published: true,
   },
@@ -600,11 +606,12 @@ export const videos: Video[] = [
     slug: "fiber-pumps-haptics-wearables",
     title: "Fiber-like pumps to power haptics devices and wearables",
     youtube_id: "forx6TA_1wg",
-    category: "Research",
+    category: "Research (When Vito was at EPFL-LMTS)",
     date_label: "2023",
     description:
       "The fiber pump published in Science: a soft tube 2 mm across that generates pressure along its own length. Video: EPFL.",
     thumb_label: "YouTube — fiber pumps",
+    paper_slug: "fiber-pumps-wearable-fluidic-systems",
     sort_order: 20,
     published: true,
   },
@@ -618,6 +625,7 @@ export const videos: Video[] = [
     description:
       "The stretchable pump published in Nature: electricity becomes flow with no moving parts. Video: EPFL.",
     thumb_label: "YouTube — stretchable pump",
+    paper_slug: "stretchable-pumps-for-soft-machines",
     sort_order: 30,
     published: true,
   },
@@ -631,6 +639,7 @@ export const videos: Video[] = [
     description:
       "Fluidic circuits woven into a garment that heats and cools the wearer, with no external pump. Video: LMTS, EPFL.",
     thumb_label: "YouTube — thermoregulatory clothing",
+    paper_slug: "fiber-pumps-wearable-fluidic-systems",
     sort_order: 40,
     published: true,
   },
@@ -644,6 +653,7 @@ export const videos: Video[] = [
     description:
       "The soft manipulation system built by the lab's student team, the technology behind the RoboSoft entry.",
     thumb_label: "YouTube — soft gripper at RPL",
+    paper_slug: null,
     sort_order: 50,
     published: true,
   },
@@ -657,6 +667,7 @@ export const videos: Video[] = [
     description:
       "Electroadhesive gripping picks up fruit without bruising it: the line that led to the spin-off OmniGrasp.",
     thumb_label: "YouTube — electroadhesion soft gripper",
+    paper_slug: null,
     sort_order: 60,
     published: true,
   },

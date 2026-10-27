@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { Media } from "@/components/media";
+import { SourceCredit } from "@/components/source-credit";
 import { Container, InnerHero, OfflineNotice } from "@/components/ui";
 import { getPapers } from "@/lib/queries";
+import { paperSource } from "@/lib/sources";
 
 export const revalidate = 300;
 
@@ -36,6 +38,9 @@ export default async function PublicationsPage() {
                   fill
                   sizes="(max-width: 960px) 100vw, 230px"
                 />
+                {paper.media_url && (
+                  <SourceCredit source={paperSource(paper)} overlay />
+                )}
               </div>
               <div className="dettagli">
                 <span className="rivista">

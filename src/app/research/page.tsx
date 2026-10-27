@@ -3,9 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Media } from "@/components/media";
+import { SourceCredit } from "@/components/source-credit";
 import { Container, InnerHero, OfflineNotice } from "@/components/ui";
 import { getPapers, getResearchLines } from "@/lib/queries";
 import { asset, site } from "@/lib/site";
+import { paperSource } from "@/lib/sources";
 
 export const revalidate = 300;
 
@@ -48,10 +50,18 @@ export default async function ResearchPage() {
                 fill
                 sizes="(max-width: 960px) 100vw, 45vw"
               />
+              {paper.media_url && (
+                <SourceCredit
+                  source={paperSource(paper)}
+                  overlay
+                  link={false}
+                />
+              )}
             </div>
             <div className="corpo">
               <span className="rivista">
                 {paper.journal} · {paper.year}
+                {paper.badge_note && ` (${paper.badge_note})`}
               </span>
               <h3>{paper.title}</h3>
               <p>{paper.summary}</p>

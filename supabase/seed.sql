@@ -88,7 +88,7 @@ insert into public.papers (
     'electrofluidic-fiber-muscles',
     'Electrofluidic fiber muscles',
     'Science Robotics', 2026,
-    'Kilic Afsar, Pupillo, Vitucci, Babatain, Ishii, Cacucciolo.',
+    'Afsar, Pupillo, Vitucci, Babatain, Ishii, Cacucciolo.',
     'O. Kilic Afsar, G. Pupillo, G. Vitucci, W. Babatain, H. Ishii, V. Cacucciolo',
     'Science Robotics (2026) — MIT Media Lab · Politecnico di Bari · Co-funded by the European Research Council',
     $t$With the MIT Media Lab: a new class of fiber-format artificial muscles that integrates fiber pumps and McKibben actuators in a closed circuit. Electric, silent and untethered, they pair up in antagonistic configurations like biological muscle and, thanks to bias pressure, reach power densities comparable to skeletal muscle.$t$,
@@ -130,10 +130,9 @@ insert into public.papers (
     null, null,
     'Image — fiber pump in textile', '/papers/fiber-pump.jpg', 1920, 1080,
     $j$[
-      {"value": "2 mm",  "label": "in diameter: a pump in the form of a thread"},
-      {"value": "∞",     "label": "continuous fabrication, cut to length"},
-      {"value": "100%",  "label": "weavable: sewn, braided, worn"},
-      {"value": "0 dB*", "label": "silent operation, no moving parts"}
+      {"value": "100 kPa/m", "label": "pressure per metre: proportional to fiber length"},
+      {"value": "2 mm",      "label": "in diameter: flexible, sewn and woven into textiles"},
+      {"value": "200 ms",    "label": "to reach maximum stable pressure"}
     ]$j$::jsonb,
     $j$[
       {"type": "heading",   "text": "The problem"},
@@ -336,3 +335,21 @@ on conflict (slug) do update set
   title = excluded.title, youtube_id = excluded.youtube_id, category = excluded.category,
   date_label = excluded.date_label, description = excluded.description,
   thumb_label = excluded.thumb_label, sort_order = excluded.sort_order;
+
+-- ------------------------------------------------------------------ fonti --
+-- Da dove vengono figure e video: alimentano le didascalie con la fonte.
+update public.papers set open_access_url = 'https://zenodo.org/records/17902764'
+  where slug = 'electrofluidic-fiber-muscles';
+update public.videos set paper_slug = 'electrofluidic-fiber-muscles'
+  where slug = 'electrofluidic-fiber-muscles';
+update public.videos set paper_slug = 'fiber-pumps-wearable-fluidic-systems'
+  where slug in ('fiber-pumps-haptics-wearables', 'thermoregulatory-clothing');
+update public.videos set paper_slug = 'stretchable-pumps-for-soft-machines'
+  where slug = 'miniature-stretchable-pump';
+
+-- Lavori nati all'EPFL: la nota compare accanto a rivista e anno in /research
+-- e accanto alla categoria in /videos.
+update public.papers set badge_note = 'When Vito was at EPFL-LMTS'
+  where slug in ('fiber-pumps-wearable-fluidic-systems', 'stretchable-pumps-for-soft-machines');
+update public.videos set category = 'Research (When Vito was at EPFL-LMTS)'
+  where slug = 'fiber-pumps-haptics-wearables';

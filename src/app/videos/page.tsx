@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 
 import { Container, InnerHero, OfflineNotice } from "@/components/ui";
+import { SourceCredit } from "@/components/source-credit";
 import { VideoEmbed } from "@/components/video-embed";
-import { getVideos } from "@/lib/queries";
+import { getPapers, getVideos } from "@/lib/queries";
+import { sourceFor } from "@/lib/sources";
 
 export const revalidate = 300;
 
@@ -16,7 +18,10 @@ export const metadata: Metadata = {
 };
 
 export default async function VideosPage() {
-  const { data: videos, offline } = await getVideos();
+  const [{ data: videos, offline }, { data: papers }] = await Promise.all([
+    getVideos(),
+    getPapers(),
+  ]);
 
   return (
     <main>
@@ -41,6 +46,7 @@ export default async function VideosPage() {
                 </div>
                 <h3>{video.title}</h3>
                 <p>{video.description}</p>
+                <SourceCredit source={sourceFor(papers, video.paper_slug)} />
               </div>
             </article>
           ))}
