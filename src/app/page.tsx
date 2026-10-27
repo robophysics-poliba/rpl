@@ -71,12 +71,18 @@ export default async function HomePage() {
               machines the same fluidity as living bodies.
             </p>
             <p>
-              Led by Prof. Vito Cacucciolo and supported by an ERC Starting Grant,
-              our research has delivered some of the field&apos;s landmark
-              results: the world&apos;s first stretchable pumps for fluidic
-              muscles (Nature, 2019), two-millimetre fiber pumps for textile
-              exosuits and haptic feedback (Science, 2023), and electrofluidic
-              muscles developed with the MIT Media Lab (Science Robotics, 2026).
+              The lab builds on the work of its Principal Investigator, Prof.
+              Vito Cacucciolo, at the Soft Transducers Laboratory of EPFL
+              (LMTS): the world&apos;s first stretchable pumps, a project he led
+              (Nature, 2019), and fiber pumps for wearable fluidics, of which he
+              is a co-inventor (Science, 2023).
+            </p>
+            <p>
+              Supported by an ERC Starting Grant, the lab has since developed
+              electrofluidic fiber muscles with the MIT Media Lab (Science
+              Robotics, 2026) and their closed-loop control, as well as
+              electroadhesion soft grippers for delicate objects, now brought
+              to industry by the spin-off OmniGrasp.
             </p>
             <p>
               From soft robotics to rehabilitation medicine, we turn the

@@ -117,6 +117,9 @@ alter table public.videos add column if not exists paper_slug      text;
 -- Nota accanto a rivista e anno nelle card di /research.
 alter table public.papers add column if not exists badge_note text;
 
+-- Anteprima dedicata nel riquadro stretto di /publications.
+alter table public.papers add column if not exists preview_url text;
+
 -- ----------------------------------------------------------------- videos --
 create table if not exists public.videos (
   id          uuid primary key default gen_random_uuid(),

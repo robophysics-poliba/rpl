@@ -73,6 +73,11 @@ export type Paper = {
   media_url: string | null;
   media_width: number | null;
   media_height: number | null;
+  /**
+   * Anteprima nel riquadro stretto di /publications, se media_url non ci sta
+   * bene (una striscia orizzontale ritagliata lì diventa pochi pixel).
+   */
+  preview_url: string | null;
   facts: PaperFact[];
   sections: PaperSection[];
   sort_order: number;

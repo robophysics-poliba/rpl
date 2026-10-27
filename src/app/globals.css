@@ -764,6 +764,13 @@ nav a.nav-btn-euroeap:active {
   width: 100%;
   height: auto;
 }
+/* Le foto verticali a tutta larghezza riempirebbero più di uno schermo: oltre
+   questa altezza si stringono, centrate nel riquadro. Quelle orizzontali non
+   arrivano al limite e restano come sono. */
+.paper-media img {
+  max-height: 720px;
+  object-fit: contain;
+}
 /* Riquadro del video dentro il corpo di un articolo. */
 .paper-media .player {
   position: relative;

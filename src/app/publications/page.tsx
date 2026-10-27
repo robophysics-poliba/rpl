@@ -33,18 +33,19 @@ export default async function PublicationsPage() {
             <article className="pub-item" key={paper.id}>
               <div className="anteprima">
                 <Media
-                  url={paper.media_url}
+                  url={paper.preview_url ?? paper.media_url}
                   label={paper.media_label.replace(/^Image —/, "Preview —")}
                   fill
                   sizes="(max-width: 960px) 100vw, 230px"
                 />
-                {paper.media_url && (
+                {(paper.preview_url ?? paper.media_url) && (
                   <SourceCredit source={paperSource(paper)} overlay />
                 )}
               </div>
               <div className="dettagli">
                 <span className="rivista">
                   {paper.journal} · {paper.year}
+                  {paper.badge_note && ` (${paper.badge_note})`}
                 </span>
                 <h3>{paper.title}</h3>
                 <div className="autori-pub">

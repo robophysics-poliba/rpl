@@ -169,9 +169,13 @@ insert into public.papers (
       {"type": "paragraph", "text": "For over a decade, soft robotics has been developing artificial muscles driven by pressurised fluids. But the fluid has to be pumped, and conventional pumps are rigid, heavy and noisy, anchored outside the robot with tubes and compressors. A soft-bodied machine remained tethered to hard infrastructure — the bottleneck of the entire field."},
       {"type": "heading",   "text": "The innovation"},
       {"type": "paragraph", "text": "This research demonstrated the first fully soft, stretchable pump: an elastomer channel with flexible electrodes that moves fluid through electrohydrodynamics (EHD). An electric field injects charge into the dielectric liquid and the migrating ions drag the fluid along with them. No gears, no membrane, no rotor: pressure arises directly from electricity, in silence."},
-      {"type": "media",     "label": "Image — stretchable pump bent between the fingers", "caption": "Fig. 1 — The pump keeps its performance even when bent, twisted or stretched: it can be integrated into the robot's own body."},
+      {"type": "media", "label": "Image — working principle of the stretchable pump", "caption": "Fig. 1 — Working principle: electrodes along the channel inject charge into the liquid, and the ions drag it along, creating a net flow.", "url": "/papers/stretchable-pump-principle.jpg", "width": 1800, "height": 559},
+      {"type": "media", "label": "Image — stretchable pump bent between the fingers", "caption": "Fig. 2 — The pump keeps its performance even when bent, twisted or stretched: it can be integrated into the robot's own body.", "url": "/papers/stretchable-pump-bent.jpg", "width": 1800, "height": 1200},
+      {"type": "media", "label": "Image — stretchable pump rolled into a ring", "caption": "Fig. 3 — Fully soft: electrodes and channel bend with the elastomer, here rolled into a ring.", "url": "/papers/stretchable-pump-ring.jpg", "width": 1177, "height": 1400},
       {"type": "heading",   "text": "Why it matters"},
-      {"type": "paragraph", "text": "With a soft, lightweight and silent pump, the fluidic circuit can finally live inside the robot or inside a wearable garment. It is the result that opened the lab's research line on portable fluidic muscles — and the conceptual foundation from which, four years later, the fiber pumps would emerge."}
+      {"type": "paragraph", "text": "With a soft, lightweight and silent pump, the fluidic circuit can finally live inside the robot or inside a wearable garment. It is the result that opened the lab's research line on portable fluidic muscles — and the conceptual foundation from which, four years later, the fiber pumps would emerge."},
+      {"type": "media", "label": "Image — stretchable pump held up to the light", "caption": "Fig. 4 — Thin, transparent and flexible: a pump small enough to sit inside the machine it drives.", "url": "/papers/stretchable-pump-held.jpg", "width": 1800, "height": 1200},
+      {"type": "media", "label": "Image — glove with a stretchable pump on the back of the hand", "caption": "Fig. 5 — A wearable application: the pump on the back of the hand, inside the glove's fluidic circuit.", "url": "/papers/stretchable-pump-glove-hand.jpg", "width": 1060, "height": 1500}
     ]$j$::jsonb,
     30
   )
@@ -353,3 +357,7 @@ update public.papers set badge_note = 'When Vito was at EPFL-LMTS'
   where slug in ('fiber-pumps-wearable-fluidic-systems', 'stretchable-pumps-for-soft-machines');
 update public.videos set category = 'Research (When Vito was at EPFL-LMTS)'
   where slug = 'fiber-pumps-haptics-wearables';
+
+-- La striscia del tessuto non regge il riquadro stretto di /publications.
+update public.papers set preview_url = '/fiber-pump-two-hands.jpg'
+  where slug = 'electrofluidic-fiber-muscles';
