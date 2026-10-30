@@ -92,9 +92,16 @@ export const navigation = [
    * Sito della conferenza EuroEAP 2027: una pagina HTML a sé, in
    * public/euroeap2027/, con la sua grafica. Non è una rotta di Next, quindi
    * header e footer la linkano con un <a> normale (vedi `staticPage`).
-   * Nel menù principale dell'header è evidenziata come bottoncino rosso (vedi `isButton`).
+   * Per ora solo nel footer: `inHeader: false` la toglie dal menù in alto,
+   * dove era evidenziata come bottoncino rosso (vedi `isButton`).
    */
-  { href: "/euroeap2027/", label: "EuroEAP 2027", staticPage: true, isButton: true },
+  {
+    href: "/euroeap2027/",
+    label: "EuroEAP 2027",
+    staticPage: true,
+    isButton: true,
+    inHeader: false,
+  },
 ] as const;
 
 /** Intestazioni dei gruppi in /people, nell'ordine di visualizzazione. */
@@ -103,6 +110,7 @@ export const roleGroups = [
   { key: "researchers", label: "Researchers & Postdocs" },
   { key: "phd", label: "PhD Students" },
   { key: "students", label: "Students" },
+  { key: "spinoff", label: "Spin-off OmniGrasp" },
   { key: "visitors", label: "Visitors" },
   { key: "alumni", label: "Alumni" },
 ] as const;

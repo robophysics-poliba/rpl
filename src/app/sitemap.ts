@@ -5,6 +5,7 @@ import type { MetadataRoute } from "next";
 export const dynamic = "force-static";
 
 import { getNews, getPapers } from "@/lib/queries";
+import { projects } from "@/lib/data/projects";
 import { navigation, pageUrl } from "@/lib/site";
 
 export const revalidate = 3600;
@@ -19,8 +20,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: pageUrl("/"), priority: 1 },
     ...navigation.map((item) => ({ url: pageUrl(item.href), priority: 0.8 })),
     { url: pageUrl("/people/vito-cacucciolo"), priority: 0.7 },
+    ...projects.map((project) => ({
+      url: pageUrl(`/research/${project.slug}`),
+      priority: 0.7,
+    })),
     ...papers.map((paper) => ({
-      url: pageUrl(`/research/${paper.slug}`),
+      url: pageUrl(`/publications/${paper.slug}`),
       priority: 0.7,
     })),
     ...news.map((item) => ({

@@ -184,19 +184,19 @@ const highlights = [
     venue: "Science Robotics · 2026",
     title: "Electrofluidic Fiber Muscles",
     text: "Electrically driven artificial muscles with a power density comparable to skeletal muscle (50 W/kg), driven by EHD fiber pumps in a closed circuit. 20% strain, response under 0.3 s.",
-    href: "/research/electrofluidic-fiber-muscles",
+    href: "/publications/electrofluidic-fiber-muscles",
   },
   {
     venue: "Science · 2023",
     title: "Fiber pumps for wearable fluidics",
     text: "The first pumps in the form of 2 mm-thick rubber tubes: the tube is the pump, enabling fluidics for thermally active clothing and soft robots.",
-    href: "/research/fiber-pumps-wearable-fluidic-systems",
+    href: "/publications/fiber-pumps-wearable-fluidic-systems",
   },
   {
     venue: "Nature · 2019",
     title: "Stretchable pumps for soft machines",
     text: "World-first fully stretchable pumps, enabling thermally active wearables and fluidic artificial muscles.",
-    href: "/research/stretchable-pumps-for-soft-machines",
+    href: "/publications/stretchable-pumps-for-soft-machines",
   },
   {
     venue: "Extreme Mechanics Letters · 2022",

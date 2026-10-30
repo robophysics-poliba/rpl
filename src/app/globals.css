@@ -1278,6 +1278,10 @@ footer .colofone a:hover {
   color: var(--blu);
   border-color: var(--blu);
 }
+/* Pubblicazioni senza figura: solo testo, a tutta larghezza. */
+.pub-item.senza-anteprima {
+  grid-template-columns: 1fr;
+}
 
 /* ---------- VIDEOS ---------- */
 .griglia-video {
@@ -2103,6 +2107,256 @@ footer .social svg {
 .demo .colonna-video > .fonte {
   margin: 0;
   padding: 10px 16px;
+}
+
+/* ---------- PROGETTI (/research e /research/<slug>) ---------- */
+/* Card di /research: riga con finanziatori e partner, sotto il riassunto. */
+.card-ricerca p.meta-progetto {
+  font-size: 11.5px;
+  letter-spacing: 0.04em;
+  color: #6a6e7c;
+}
+/* Obiettivi: tre riquadri invece dei quattro delle linee di ricerca. */
+.linee.tre {
+  grid-template-columns: repeat(3, 1fr);
+}
+.paper-corpo p.link-esterno {
+  text-align: left;
+}
+.paper-corpo .link-esterno a,
+.paper-corpo p a {
+  color: var(--blu);
+}
+/* Un risultato: un articolo, con le sue figure. */
+.risultato {
+  margin: 36px 0 56px;
+  padding-top: 28px;
+  border-top: 1px solid #d5d7dc;
+}
+.rivista-progetto {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bianco);
+  background: var(--blu);
+  padding: 5px 12px;
+  margin-bottom: 14px;
+}
+.risultato h3 {
+  font-family: var(--grot);
+  font-weight: 700;
+  font-size: clamp(20px, 2.2vw, 24px);
+  line-height: 1.25;
+  margin-bottom: 8px;
+}
+.autori-risultato {
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.6;
+  color: #6a6e7c;
+  margin-bottom: 18px;
+}
+.risultato .paper-media {
+  margin: 28px 0;
+}
+.azioni-risultato {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 8px;
+}
+/* Due figure affiancate, allineate in alto. */
+.coppia-figure {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+  margin: 28px 0;
+}
+.coppia-figure .paper-media {
+  margin: 0;
+}
+/* Scheda del finanziamento. */
+.scheda-grant {
+  background: var(--bianco);
+  border-top: 3px solid var(--blu);
+  padding: 30px 32px 32px;
+  margin: 32px 0 56px;
+}
+.scheda-grant .testa {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px 32px;
+  margin-bottom: 22px;
+}
+.scheda-grant h3 {
+  font-family: var(--grot);
+  font-weight: 700;
+  font-size: 20px;
+}
+.loghi-grant {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px 26px;
+}
+.loghi-grant img {
+  width: auto;
+  max-width: 100%;
+}
+.scheda-grant dl {
+  margin: 0 0 20px;
+}
+.scheda-grant dl > div {
+  display: grid;
+  grid-template-columns: 190px 1fr;
+  gap: 16px;
+  padding: 9px 0;
+  border-top: 1px solid #e2e4e8;
+}
+.scheda-grant dt {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--blu);
+  padding-top: 2px;
+}
+.scheda-grant dd {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.6;
+  color: #2c2f38;
+}
+.paper-corpo .scheda-grant p.dichiarazione {
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: #6a6e7c;
+  text-align: left;
+  margin-bottom: 20px;
+}
+/* Elenco delle pubblicazioni di un progetto. */
+.elenco-pub {
+  list-style: none;
+  margin: 0 0 40px;
+  padding: 0;
+  counter-reset: pub;
+}
+.elenco-pub li {
+  counter-increment: pub;
+  position: relative;
+  padding: 14px 0 14px 40px;
+  border-top: 1px solid #e2e4e8;
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.65;
+  color: #2c2f38;
+}
+.elenco-pub li::before {
+  content: "[" counter(pub) "]";
+  position: absolute;
+  left: 0;
+  color: var(--blu);
+}
+.elenco-pub .titolo-cit {
+  font-weight: 700;
+}
+.elenco-pub .link-cit {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 6px;
+}
+.elenco-pub .link-cit a {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--blu);
+  text-decoration: none;
+  border-bottom: 1.5px solid var(--blu);
+  padding-bottom: 1px;
+}
+/* Ancore dei "Learn more" di /publications: non sotto l'header fisso. */
+.risultato[id],
+.paper-corpo h2[id] {
+  scroll-margin-top: 90px;
+}
+/* Il gruppo di un progetto: ritratto tondo, nome e ruolo. */
+.squadra {
+  list-style: none;
+  margin: 24px 0 48px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 18px 24px;
+}
+.paper-corpo .squadra .membro {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: inherit;
+  text-decoration: none;
+  border: 0;
+}
+.squadra .ritratto {
+  position: relative;
+  flex: none;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--blu);
+  color: var(--bianco);
+  display: grid;
+  place-items: center;
+  font-family: var(--grot);
+  font-weight: 700;
+  font-size: 18px;
+}
+.squadra .ritratto img {
+  object-fit: cover;
+}
+.squadra .nome {
+  display: block;
+  font-family: var(--grot);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.3;
+}
+.squadra .ruolo-membro {
+  display: block;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6a6e7c;
+  margin-top: 3px;
+}
+.squadra a.membro:hover .nome {
+  color: var(--blu);
+}
+@media (max-width: 960px) {
+  .linee.tre {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 600px) {
+  .linee.tre,
+  .coppia-figure {
+    grid-template-columns: 1fr;
+  }
+  .scheda-grant {
+    padding: 24px 20px;
+  }
+  .scheda-grant dl > div {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
 }
 
 /* ---------- AVVISO CONTENUTI OFFLINE ---------- */

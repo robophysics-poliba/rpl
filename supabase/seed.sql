@@ -31,15 +31,15 @@ insert into public.people (slug, name, role, role_group, bio, photo_url, photo_l
 
   ('elisabetta-annese', 'Elisabetta Annese', 'MSc Student', 'students',
    $t$Member of the winning team at the RoboSoft Competition 2026 (Kanazawa, Japan). Thesis on soft manipulation.$t$,
-   '/people/silhouette-woman.jpg', 'Portrait not yet available', null, null, 80),
+   '/people/elisabetta-annese.jpg', 'Portrait photo', null, null, 80),
 
   ('luca-mitaritonna', 'Luca Mitaritonna', 'MSc Student', 'students',
    $t$Member of the winning team at the RoboSoft Competition 2026 (Kanazawa, Japan). Thesis on electroadhesive grippers.$t$,
-   '/people/silhouette-man.jpg', 'Portrait not yet available', null, null, 90),
+   '/people/luca-mitaritonna.jpg', 'Portrait photo', null, null, 90),
 
   ('giuseppe-macchia', 'Giuseppe Macchia', 'MSc Student', 'students',
    $t$Member of the winning team at the RoboSoft Competition 2026 (Kanazawa, Japan). Thesis on fluidic-actuator control.$t$,
-   '/people/silhouette-man.jpg', 'Portrait not yet available', null, null, 100),
+   '/people/giuseppe-macchia.jpg', 'Portrait photo', null, null, 100),
 
   -- Bio ancora da scrivere: la card mostra nome, ruolo e link.
   ('simone-de-carolis', 'Simone De Carolis', 'Assistant Professor / RTDA', 'researchers',
@@ -56,6 +56,20 @@ insert into public.people (slug, name, role, role_group, bio, photo_url, photo_l
    $t$Master of Science in Mechatronics and Robotics Engineering Student | Bachelor’s Degree in Mechanical Engineering$t$,
    '/people/nicola-creanza.jpg', 'Portrait photo', null,
    'https://www.linkedin.com/in/nicola-creanza-9509b7255/', 78),
+
+  -- Lavorano per OmniGrasp, lo spin-off ospitato nel laboratorio. Foto dal
+  -- sito di OmniGrasp (omnigrasp.com/about-us).
+  ('fabio-caruso', 'Fabio Caruso', 'CEO, OmniGrasp', 'spinoff',
+   $t$CEO of OmniGrasp, the laboratory's spin-off. First author of electroadhesion suction cups (Advanced Materials, 2025).$t$,
+   '/people/fabio-caruso.jpg', 'Portrait photo', null, 'https://omnigrasp.com/about-us/', 102),
+
+  ('fabio-gargano', 'Fabio Gargano', 'Head of Mechatronics, OmniGrasp', 'spinoff',
+   '',
+   '/people/fabio-gargano.jpg', 'Portrait photo', null, 'https://omnigrasp.com/about-us/', 104),
+
+  ('antonio-camposeo', 'Antonio Camposeo', 'Head of Software & AI, OmniGrasp', 'spinoff',
+   '',
+   '/people/antonio-camposeo.jpg', 'Portrait photo', null, 'https://omnigrasp.com/about-us/', 106),
 
   -- Segnaposto: le sezioni Visitors e Alumni compaiono solo se hanno righe.
   -- Il testo fra parentesi quadre dice cosa ci va; vanno sostituiti o tolti.

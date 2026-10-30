@@ -7,6 +7,11 @@ import { Fragment, useEffect, useState } from "react";
 
 import { asset, navigation, site } from "@/lib/site";
 
+// Le voci con `inHeader: false` (EuroEAP 2027) restano solo nel footer.
+const vociHeader = navigation.filter(
+  (item) => !("inHeader" in item && item.inHeader === false),
+);
+
 export function SiteHeader() {
   const pathname = usePathname();
   const [aperto, setAperto] = useState(false);
@@ -73,8 +78,9 @@ export function SiteHeader() {
       </button>
 
       <nav id="menu-principale" aria-label="Main">
-        {navigation.map((item, index) => {
-          // /research resta attiva anche sugli approfondimenti /research/[slug].
+        {vociHeader.map((item, index) => {
+          // Una voce resta attiva anche sulle sue sottopagine: /research sui
+          // progetti, /publications sulle pagine dei paper.
           const attiva =
             pathname === item.href || pathname.startsWith(`${item.href}/`);
           const isButton = "isButton" in item && Boolean(item.isButton);

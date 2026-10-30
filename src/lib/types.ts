@@ -3,6 +3,7 @@ export type RoleGroup =
   | "researchers"
   | "phd"
   | "students"
+  | "spinoff"
   | "visitors"
   | "alumni";
 

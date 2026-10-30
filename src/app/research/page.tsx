@@ -2,17 +2,17 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Media } from "@/components/media";
 import { SourceCredit } from "@/components/source-credit";
 import { Container, InnerHero, OfflineNotice } from "@/components/ui";
-import { getPapers, getResearchLines } from "@/lib/queries";
+import { projects } from "@/lib/data/projects";
+import { getPapers } from "@/lib/queries";
 import { asset, site } from "@/lib/site";
-import { paperSource } from "@/lib/sources";
+import { sourceFor } from "@/lib/sources";
 
 export const revalidate = 300;
 
 const intro =
-  "We move intelligence from software into matter: pumps, muscles and fibers that generate motion from electricity alone — no motors, compressors or rigid parts.";
+  "The research projects and grants hosted at the RoboPhysics Laboratory: from fluids driven by electric fields to soft grippers with electroactive contacts.";
 
 export const metadata: Metadata = {
   title: "Research",
@@ -21,68 +21,49 @@ export const metadata: Metadata = {
 };
 
 export default async function ResearchPage() {
-  const [papersResult, linesResult] = await Promise.all([
-    getPapers(),
-    getResearchLines(),
-  ]);
+  // Serve solo per la didascalia delle foto che vengono da un paper.
+  const { data: papers, offline } = await getPapers();
 
   return (
     <main>
-      <InnerHero eyebrow="Research" title="Physical intelligence">
+      <InnerHero eyebrow="Research" title="Projects and grants">
         {intro}
       </InnerHero>
 
-      {/* I figli restano fratelli diretti di .contenitore: è da lì che
+      {/* Le card restano figlie dirette di .contenitore: è da lì che
           .card-ricerca:nth-child(even) ricava l'alternanza delle colonne. */}
       <Container>
-        <h2 className="titolo-sezione">Milestones</h2>
-
-        {papersResult.data.map((paper) => (
+        {projects.map((project) => (
           <Link
             className="card-ricerca"
-            href={`/research/${paper.slug}`}
-            key={paper.id}
+            href={`/research/${project.slug}`}
+            key={project.slug}
           >
             <div className="media">
-              <Media
-                url={paper.media_url}
-                label={paper.media_label}
+              <Image
+                src={asset(project.image.url)}
+                alt={project.image.alt}
                 fill
                 sizes="(max-width: 960px) 100vw, 45vw"
               />
-              {paper.media_url && (
-                <SourceCredit
-                  source={paperSource(paper)}
-                  overlay
-                  link={false}
-                />
-              )}
+              {/* Tutta la card è un link: la fonte qui è solo testo. */}
+              <SourceCredit
+                source={
+                  project.image.source ?? sourceFor(papers, project.image.paper)
+                }
+                overlay
+                link={false}
+              />
             </div>
             <div className="corpo">
-              <span className="rivista">
-                {paper.journal} · {paper.year}
-                {paper.badge_note && ` (${paper.badge_note})`}
-              </span>
-              <h3>{paper.title}</h3>
-              <p>{paper.summary}</p>
-              <p>{paper.authors_short}</p>
+              <span className="rivista">{project.badge}</span>
+              <h3>{project.title}</h3>
+              <p>{project.summary}</p>
+              <p className="meta-progetto">{project.meta}</p>
               <span className="leggi-di-piu">Learn more →</span>
             </div>
           </Link>
         ))}
-
-        <h2 className="titolo-sezione">
-          Research lines — ERC RoboFluid project
-        </h2>
-        <div className="linee">
-          {linesResult.data.map((line) => (
-            <article className="linea" key={line.id}>
-              <div className="num">{line.number}</div>
-              <h4>{line.title}</h4>
-              <p>{line.description}</p>
-            </article>
-          ))}
-        </div>
       </Container>
 
       <section className="cta-spinoff">
@@ -101,7 +82,7 @@ export default async function ResearchPage() {
         </a>
       </section>
 
-      <OfflineNotice show={papersResult.offline || linesResult.offline} />
+      <OfflineNotice show={offline} />
     </main>
   );
 }

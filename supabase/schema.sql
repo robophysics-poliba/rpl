@@ -7,14 +7,14 @@ create extension if not exists "pgcrypto";
 
 -- ----------------------------------------------------------------- people --
 -- role_group pilota il raggruppamento della pagina /people (Principal
--- Investigator, Researchers & Postdocs, PhD Students, Students, Visitors,
--- Alumni). Le intestazioni e il loro ordine stanno in src/lib/site.ts.
+-- Investigator, Researchers & Postdocs, PhD Students, Students, Spin-off
+-- OmniGrasp, Visitors, Alumni). Le intestazioni e il loro ordine stanno in src/lib/site.ts.
 create table if not exists public.people (
   id          uuid primary key default gen_random_uuid(),
   slug        text not null unique,
   name        text not null,
   role        text not null,
-  role_group  text not null check (role_group in ('pi', 'researchers', 'phd', 'students', 'visitors', 'alumni')),
+  role_group  text not null check (role_group in ('pi', 'researchers', 'phd', 'students', 'spinoff', 'visitors', 'alumni')),
   bio         text not null default '',
   photo_url   text,
   photo_label text not null default 'Portrait photo',
@@ -99,10 +99,11 @@ create table if not exists public.news (
 -- country: codice ISO per la bandierina in /people, aggiunto dopo il rilascio.
 alter table public.people add column if not exists country text;
 
--- role_group ora accetta anche 'visitors' e 'alumni'.
+-- role_group ora accetta anche 'visitors', 'alumni' e 'spinoff' (chi lavora
+-- per OmniGrasp, ospitata nel laboratorio).
 alter table public.people drop constraint if exists people_role_group_check;
 alter table public.people add constraint people_role_group_check
-  check (role_group in ('pi', 'researchers', 'phd', 'students', 'visitors', 'alumni'));
+  check (role_group in ('pi', 'researchers', 'phd', 'students', 'spinoff', 'visitors', 'alumni'));
 
 -- news: galleria di foto e link al post di origine.
 alter table public.news add column if not exists gallery      jsonb not null default '[]'::jsonb;
